@@ -2,20 +2,24 @@ package com.iqos.qrscanner.app;
 
 import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
+import android.graphics.Color;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
@@ -37,7 +41,8 @@ public class QRScannerActivity extends AppCompatActivity implements SurfaceHolde
     private ViewfinderView mScanView;
     private CaptureActivityHandler handler;
     private Vector<BarcodeFormat> decodeFormats;
-    private Toolbar mToolbar;
+    //private Toolbar mToolbar;
+    private Button mButton;
     private String characterSet;
     private InactivityTimer inactivityTimer;
     private MediaPlayer mediaPlayer;
@@ -49,6 +54,7 @@ public class QRScannerActivity extends AppCompatActivity implements SurfaceHolde
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutResources());
+
         this.setFitSystem();
         this.findViews();
         this.init();
@@ -79,7 +85,8 @@ public class QRScannerActivity extends AppCompatActivity implements SurfaceHolde
      */
     protected void findViews() {
         this.mScanView = findViewById(R.id.viewfinder_view);
-        this.mToolbar = findViewById(R.id.app_scan_tool_bar);
+        this.mButton = findViewById(R.id.button);
+        //this.mToolbar = findViewById(R.id.app_scan_tool_bar);
     }
 
 
@@ -91,18 +98,26 @@ public class QRScannerActivity extends AppCompatActivity implements SurfaceHolde
         CameraManager.init(getApplication());
         hasSurface = false;
         inactivityTimer = new InactivityTimer(this);
-        setSupportActionBar(mToolbar);
-        ActionBar supportActionBar = getSupportActionBar();
-        if (null != supportActionBar) {
-            supportActionBar.setHomeButtonEnabled(true);
-            supportActionBar.setDisplayHomeAsUpEnabled(true);
-            mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    finish();
-                }
-            });
-        }
+        mButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Log.d("z1u24","123456");
+                finish();
+            }
+        });
+        //setSupportActionBar(mToolbar);
+//        ActionBar supportActionBar = getSupportActionBar();
+//        if (null != supportActionBar) {
+//            supportActionBar.setHomeButtonEnabled(true);
+//            supportActionBar.setDisplayHomeAsUpEnabled(true);
+//
+////            mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+////                @Override
+////                public void onClick(View v) {
+////                    finish();
+////                }
+////            });
+//        }
     }
 
     @Override

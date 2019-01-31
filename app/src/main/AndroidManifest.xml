@@ -21,6 +21,6 @@
             android:name="com.iqos.qrscanner.app.QRScannerActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
-            android:theme="@style/NoActionButStatusTheme" />
+            android:theme="@style/NoActionBar" />
     </application>
 </manifest>
